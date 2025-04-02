@@ -1,6 +1,8 @@
 import Router, {RouterContext} from "koa-router";
 import bodyParser from "koa-bodyparser";
 import * as model from '../models/articles';
+import {validateArticle} from '../controllers/validation';
+import { basicAuth } from "../controllers/auth";
 // Since we are handling articles use a URI that begins with an appropriate path
 const router = new Router({prefix: '/api/v1/articles'});
 // Temporarily define some random articles in an array.
@@ -96,9 +98,9 @@ When an Article id needs to be matched we use a pattern to match
 a named route parameter. Here the name of the parameter will be 'id'
 and we will define the pattern to match at least 1 numeral. */
 router.get('/', getAll);
-router.post('/', bodyParser(), createArticle);
+router.post('/', basicAuth, bodyParser(), validateArticle, createArticle);
 router.get('/:id([0-9]{1,})', getById);
-router.put('/:id([0-9]{1,})', bodyParser(), updateArticle);
+router.put('/:id([0-9]{1,})', basicAuth, bodyParser(), validateArticle, updateArticle);
 router.del('/:id([0-9]{1,})', deleteArticle);
 // Finally, define the exported object when import from other scripts.
 export { router };
