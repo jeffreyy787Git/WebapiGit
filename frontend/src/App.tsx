@@ -1,44 +1,43 @@
 import './App.css'
-import { Card, Button, DatePicker, DatePickerProps } from 'antd';
+import { Layout, Space } from 'antd';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import 'antd/dist/reset.css';
-import './components/Hello'
-import Hello from './components/Hello';
-import Goodbye from './components/Goodbye';
-import flower from './assets/flower1.jpg';
-import flower2 from './assets/flower2.jpg';
+import Home from './components/Home'
+import Dashboard from './components/Dashboard'
+import About from './components/About'
+import Article from './components/Articles';
+import DetailArticle from './components/DetailArticle';
 
-let counter = 0
-const onChange: DatePickerProps['onChange'] = (date, dateString) => {
- console.log(date, dateString);
-};
-const onClick = (event: any) => {
- console.log(counter++)
-}
+const { Header, Content, Footer } = Layout;
 
 function App() {
 
   return (
     <>
-      <Hello name="API"/>
-      <div >
-        <Card title="Flower" style={{ width: 500, height: 300 }}>
-          <img src={flower} width={300} height={200}></img>
-          <p>This is flower</p>
-        </Card>
-        <Card title="Flower 2" style={{ width: 500, height: 300 }}>
-          <img src={flower2} width={300} height={200}></img>
-          <p>This is flower 2</p>
-        </Card>
-
-        <br/>
-
-        <Button type="primary" onClick={onClick}>Button</Button>
-        <Button type="primary" danger>Button</Button>
-
-        <br/>
-        <DatePicker onChange={onChange} />
-      </div>
-      <Goodbye name="User"/>
+      <Router>
+        <Header>
+          <nav>
+            <Space>
+              <Link to="/">Home</Link>
+              <Link to="/articles">Articles</Link>
+              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/about">About</Link>
+            </Space>
+          </nav>
+        </Header>
+        <Content>
+          <Routes>
+            <Route index element={ <Home />} />
+            <Route path="/articles" element= { <Article />}/>
+            <Route path="/a/:aid" element={<DetailArticle />} />
+            <Route path="/about" element={ <About />} />
+            <Route path="/dashboard" element={ <Dashboard /> } />
+          </Routes>
+        </Content>
+        <Footer>
+          <p>VT6003CEM Demo</p>
+        </Footer>
+      </Router>
     </>
   )
 }
