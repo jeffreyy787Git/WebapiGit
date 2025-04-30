@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 config.ts
 /node_modules/
 /output/
+=======
+node_modules
+out
+>>>>>>> 03095d00d17800a0005301e4557c9759f96262e0

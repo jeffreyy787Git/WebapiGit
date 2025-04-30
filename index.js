@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+<<<<<<< HEAD
 var __generator = (this && this.__generator) || function (thisArg, body) {
     var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
     return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
@@ -70,3 +71,25 @@ app.use(special_1.router.routes());
 app.use((0, cors_1.default)());
 console.log("Kao started");
 app.listen(10888);
+=======
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const koa_1 = __importDefault(require("koa"));
+const koa_router_1 = __importDefault(require("koa-router"));
+const koa_logger_1 = __importDefault(require("koa-logger"));
+const koa_json_1 = __importDefault(require("koa-json"));
+const app = new koa_1.default();
+const router = new koa_router_1.default();
+router.get('/', (ctx, next) => __awaiter(void 0, void 0, void 0, function* () {
+    ctx.body = { msg: 'Hello world!' };
+    yield next();
+}));
+app.use((0, koa_json_1.default)());
+app.use((0, koa_logger_1.default)());
+app.use(router.routes()).use(router.allowedMethods());
+app.listen(10888, () => {
+    console.log("Koa Started");
+});
+>>>>>>> 03095d00d17800a0005301e4557c9759f96262e0
