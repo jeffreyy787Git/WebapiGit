@@ -3,6 +3,7 @@ import Router, {RouterContext} from "koa-router";
 import logger from "koa-logger";
 import json from "koa-json";
 import serve from 'koa-static';
+import cors from '@koa/cors';
 import {router as articles} from "./routes/articles";
 import {router as special} from "./routes/special";
 
@@ -21,5 +22,6 @@ app.use(serve('./docs'));
 app.use(router.routes());
 app.use(articles.routes());
 app.use(special.routes());
+app.use(cors());
 console.log("Kao started");
 app.listen(10888);
